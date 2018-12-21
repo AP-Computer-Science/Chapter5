@@ -15,19 +15,19 @@ public class Rational implements Comparable
    public Rational (int numer, int denom)
    {
       if (denom == 0)
-      denom = 1;
+        denom = 1;
 
       // Make the numerator "store" the sign
       if (denom < 0)
       {
-      numer = numer * -1;
-      denom = denom * -1;
+        numer = numer * -1;
+        denom = denom * -1;
       }
 
       numerator = numer;
       denominator = denom;
-reduce();
-}
+      reduce();
+    }
 
    //-----------------------------------------------------------------
    //  Returns the numerator of this rational number.
@@ -138,7 +138,6 @@ else
       if (numerator != 0)
       {
          int common = gcd (Math.abs(numerator), denominator);
-
          numerator = numerator / common;
          denominator = denominator / common;
       }
@@ -159,9 +158,23 @@ else
       return num1;
    }
 
-    @Override
-    public int compareTo(Object t) {
-        Rational r = this.subtract((Rational)t);
-        return r.getNumerator();
+    public int compareTo(Object t) { 
+        int numerator = this.getNumerator();
+        int denominator = this.getDenominator();
+        int tNumerator = ((Rational)t).getNumerator();
+        int tDenominator = ((Rational)t).getDenominator();
+        float computedData = ((float)numerator / (float)denominator) % 1000;
+        System.out.println(computedData);
+        float tComputedData = ((float)tNumerator / (float)tDenominator) % 1000;
+        if(computedData > tComputedData) {
+            return 1;
+        }
+        else if(computedData == tComputedData) {
+            return 0;
+        }
+        else
+        {
+            return -1;
+        }
     }
 }
